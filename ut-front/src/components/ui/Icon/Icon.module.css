@@ -1,0 +1,22 @@
+.icon {
+  display:     inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.icon svg  { display: block; }
+
+.xs  { width: 0.75rem;  height: 0.75rem;  }
+.sm  { width: 1rem;     height: 1rem;     }
+.md  { width: 1.25rem;  height: 1.25rem;  }
+.lg  { width: 1.5rem;   height: 1.5rem;   }
+.xl  { width: 2rem;     height: 2rem;     }
+.xl2 { width: 2.5rem;   height: 2.5rem;   }
+
+.accent  { color: var(--color-accent); }
+.primary { color: var(--color-primary); }
+.muted   { color: var(--color-text-muted); }
+.success { color: var(--color-success); }
+.error   { color: var(--color-error); }
+.white   { color: #ffffff; }

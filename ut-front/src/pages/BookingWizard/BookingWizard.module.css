@@ -1,0 +1,104 @@
+﻿.page { display: flex; flex-direction: column; min-height: 100dvh; }
+.main { flex: 1; background: var(--color-bg-light); padding: clamp(1.5rem, 4vw, 3rem) 0; }
+
+/* Stepper */
+.stepper {
+  gap: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  gap: 0;
+}
+.step {
+  gap: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.stepCircle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+.stepCircleActive { border-color: var(--color-accent, #e53e3e); background: var(--color-accent, #e53e3e); color: #fff; }
+.stepCircleDone   { border-color: var(--color-accent, #e53e3e); background: var(--color-accent, #e53e3e); color: #fff; }
+.stepLabel        { font-size: var(--font-size-xs); font-weight: 500; color: var(--color-text-muted); white-space: nowrap; }
+.stepLabelActive  { color: var(--color-accent, #e53e3e); font-weight: 700; }
+.stepConnector    { width: 5rem; height: 2px; background: var(--color-border); flex-shrink: 0; transition: background 180ms ease; }
+.stepConnectorDone { background: var(--color-accent, #e53e3e); }
+
+/* Error */
+.errorBanner { color: #d32f2f; padding: 0.75rem 1rem; background: #ffebee; border-radius: var(--border-radius-md); margin-bottom: 1.25rem; font-size: var(--font-size-sm); }
+.spinnerWrap { text-align: center; padding: 3rem; }
+
+/* Panel */
+.panel {
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+/* Services grid */
+.servicesGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+
+/* Vehicle step */
+.divider    { border: none; border-top: 1px solid var(--color-border); margin: 1.5rem 0; }
+.subheading { font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); color: var(--color-text-dark); margin: 0 0 1rem; }
+
+/* Nav buttons */
+.navBtns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+.backBtn {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: 0.65rem 1.4rem;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+.backBtn:hover { border-color: var(--color-text-muted); color: var(--color-text-dark); }
+.nextBtn {
+  background: var(--color-accent, #e53e3e);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 0.65rem 1.75rem;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  margin-left: auto;
+}
+.nextBtn:hover:not(:disabled) { background: #c53030; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(229, 83, 53, 0.35); }
+.nextBtn:active:not(:disabled) { transform: translateY(0); }
+.nextBtn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+@media (max-width: 640px) {
+  .stepLabel     { display: none; }
+  .stepConnector { width: 1.5rem; }
+  .servicesGrid  { grid-template-columns: 1fr; }
+}

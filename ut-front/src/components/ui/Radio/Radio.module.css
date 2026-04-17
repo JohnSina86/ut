@@ -1,0 +1,41 @@
+.group   { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.label   { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-text-dark); margin-bottom: 0.25rem; }
+
+.option {
+  display:    inline-flex;
+  align-items: center;
+  gap:        var(--spacing-sm);
+  cursor:     pointer;
+  user-select: none;
+}
+.option.disabled { opacity: 0.5; cursor: not-allowed; }
+
+.input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.dot {
+  flex-shrink:     0;
+  width:           1.125rem;
+  height:          1.125rem;
+  border:          2px solid var(--color-border-strong);
+  border-radius:   50%;
+  background:      #ffffff;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  transition:      border-color var(--transition-fast);
+}
+.dot::after {
+  content:       '';
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    var(--color-accent);
+  transform:     scale(0);
+  transition:    transform var(--transition-fast);
+}
+.input:checked + .dot               { border-color: var(--color-accent); }
+.input:checked + .dot::after        { transform: scale(1); }
+.input:focus-visible + .dot         { box-shadow: 0 0 0 3px rgb(37 99 235 / 0.25); }
+
+.optionLabel { font-size: var(--font-size-sm); color: var(--color-text-dark); }
+.errorText   { font-size: var(--font-size-xs); color: var(--color-error); }

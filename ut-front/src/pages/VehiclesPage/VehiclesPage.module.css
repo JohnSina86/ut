@@ -1,0 +1,121 @@
+﻿/* ============================================================
+   VehiclesPage — United Tyres Dundrum
+   Tone: Professional automotive. Dark accents, warm neutrals.
+============================================================ */
+
+.page { display: flex; flex-direction: column; min-height: 100dvh; background: var(--color-bg-light); }
+.main { flex: 1; padding: var(--spacing-xl) 0; }
+
+.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl); }
+.title  { font-family: var(--font-heading); font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--spacing-lg); }
+
+/* ── Vehicle card ── */
+.vehicleCard {
+  background:      var(--color-bg-light);
+  border:          1px solid var(--color-border);
+  border-radius:   var(--border-radius-xl);
+  padding:         var(--spacing-xl);
+  display:         flex;
+  flex-direction:  column;
+  gap:             var(--spacing-md);
+  box-shadow:      var(--shadow-sm);
+  transition:      box-shadow 180ms ease, transform 180ms ease;
+}
+.vehicleCard:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.vehicleIcon { line-height: 1; }
+
+.vehiclePlate {
+  font-family:    'Courier New', Courier, monospace;
+  font-size:      var(--font-size-xl);
+  font-weight:    var(--font-weight-bold);
+  color:          var(--color-text-dark);
+  letter-spacing: 0.1em;
+  background:     var(--color-bg-light);
+  padding:        var(--spacing-xs) var(--spacing-sm);
+  border-radius:  var(--border-radius-sm);
+  display:        inline-block;
+  border:         1px solid var(--color-border);
+}
+
+.vehicleName { font-family: var(--font-heading); font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0; }
+.vehicleInfo { font-size: var(--font-size-sm); color: var(--color-text-grey); margin: 0; }
+.vehicleBody { display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+
+.vehicleActions {
+  display:     flex;
+  gap:         var(--spacing-sm);
+  margin-top:  auto;
+  padding-top: var(--spacing-md);
+  border-top:  1px solid var(--color-border);
+  align-items: center;
+}
+
+/* ── Buttons ── */
+.addBtn {
+  background:    var(--color-accent, #e53e3e);
+  color:         #fff;
+  border:        none;
+  border-radius: var(--border-radius-md);
+  padding:       0.55rem 1.25rem;
+  font-weight:   700;
+  font-size:     var(--font-size-sm);
+  cursor:        pointer;
+  transition:    background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.addBtn:hover  { background: #c53030; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(229, 83, 53, 0.35); }
+.addBtn:active { transform: translateY(0); }
+
+.editBtn {
+  flex:          1;
+  padding:       0.45rem;
+  border:        1px solid var(--color-border);
+  background:    var(--color-bg-light);
+  border-radius: var(--border-radius-sm);
+  font-size:     var(--font-size-sm);
+  cursor:        pointer;
+  transition:    background 180ms ease, border-color 180ms ease;
+}
+.editBtn:hover { filter: brightness(0.96); }
+
+.deleteBtn {
+  flex:          1;
+  padding:       0.45rem;
+  border:        1px solid #fca5a5;
+  background:    var(--color-bg-light);
+  color:         #dc2626;
+  border-radius: var(--border-radius-sm);
+  font-size:     var(--font-size-sm);
+  cursor:        pointer;
+  transition:    background 180ms ease, border-color 180ms ease;
+}
+.deleteBtn:hover { background: #fef2f2; }
+
+/* ── Top bar ── */
+.topBar { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--spacing-lg); }
+.count  { font-size: var(--font-size-sm); color: var(--color-text-grey); margin: 0; }
+
+/* ── Empty state ── */
+.emptyState { grid-column: 1 / -1; text-align: center; padding: var(--spacing-3xl) var(--spacing-xl); }
+.emptyIcon  { margin-bottom: var(--spacing-md); display: block; }
+.emptyTitle { font-family: var(--font-heading); font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0 0 0.5rem; }
+.emptyText  { font-size: var(--font-size-sm); color: var(--color-text-grey); margin: 0 auto var(--spacing-lg); max-width: 360px; }
+
+/* ── Misc ── */
+.spinnerWrap { text-align: center; padding: 3rem; }
+
+.errorBanner {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  background:      #fef2f2;
+  color:           #dc2626;
+  border:          1px solid #fca5a5;
+  border-radius:   var(--border-radius-md);
+  padding:         0.75rem 1rem;
+  margin-bottom:   1rem;
+}
+.errorClose { background: none; border: none; color: #dc2626; font-size: 1.2rem; cursor: pointer; padding: 0 0.25rem; }
+.confirmLabel { font-size: var(--font-size-xs, 0.75rem); color: #dc2626; white-space: nowrap; }

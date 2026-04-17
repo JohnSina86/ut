@@ -1,0 +1,15 @@
+.page { display: flex; flex-direction: column; }
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-xl);
+}
+.teamMember  { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--spacing-sm); }
+.memberName  { font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0; }
+.memberRole  { font-size: var(--font-size-sm); color: var(--color-accent); font-weight: var(--font-weight-medium); margin: 0; }
+.memberBio   { font-size: var(--font-size-sm); color: var(--color-text-grey); line-height: 1.6; margin: 0; }
+.valuesGrid  { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--spacing-lg); }
+.valueCard   { padding: var(--spacing-xl); border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); background: #ffffff; }
+.valueIcon   { font-size: 2rem; margin-bottom: var(--spacing-sm); }
+.valueTitle  { font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0 0 0.5rem; }
+.valueText   { font-size: var(--font-size-sm); color: var(--color-text-grey); line-height: 1.65; margin: 0; }

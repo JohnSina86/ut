@@ -1,0 +1,32 @@
+.divider {
+  display:     flex;
+  align-items: center;
+  gap:         var(--spacing-md);
+  width:       100%;
+  color:       var(--color-text-muted);
+  font-size:   var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.divider::before,
+.divider::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: var(--color-border);
+}
+.divider.noLabel::after { display: none; }
+.divider.noLabel        { display: block; height: 1px; background: var(--color-border); }
+
+.vertical {
+  display:    inline-block;
+  width:      1px;
+  height:     1.25em;
+  background: var(--color-border);
+  margin:     0 var(--spacing-sm);
+  vertical-align: middle;
+}
+
+.bold::before,
+.bold::after { background: var(--color-border-strong); height: 2px; }

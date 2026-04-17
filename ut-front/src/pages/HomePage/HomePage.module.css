@@ -1,0 +1,233 @@
+/* ============================================================
+   HomePage — United Tyres Dundrum
+   Tone: Professional automotive. Dark accents, warm neutrals.
+   ============================================================ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Section spacer ── */
+.sectionSpacer {
+  height: clamp(3rem, 6vw, 6rem);
+}
+
+/* ══════════════════════════════════════════
+   SERVICES GRID
+══════════════════════════════════════════ */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-lg, 1.5rem);
+  padding-top: var(--spacing-md, 1rem);
+}
+
+/* ══════════════════════════════════════════
+   HOW IT WORKS — vertical stepper
+══════════════════════════════════════════ */
+.stepsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding: var(--spacing-md, 1rem) 0;
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS GRID
+══════════════════════════════════════════ */
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg, 1.5rem);
+  padding-top: var(--spacing-md, 1rem);
+}
+
+/* ══════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════ */
+.statsSection {
+  background: var(--color-bg-dark, #111827);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 5vw, 3rem);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg, 1.5rem);
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  padding: 0 var(--spacing-md, 1rem);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.statItem:last-child {
+  border-right: none;
+}
+
+.statNumber {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--color-accent, #e53e3e);
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.statLabel {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: rgba(255 255 255 / 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+
+
+@media (max-width: 600px) {
+  
+}
+
+/* ══════════════════════════════════════════
+   CTA BANNER
+══════════════════════════════════════════ */
+.ctaBannerWrapper {
+  padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem);
+}
+
+.ctaBanner {
+  background: linear-gradient(135deg, var(--color-bg-dark, #111827) 0%, #1a2235 100%);
+  border-radius: var(--border-radius-xl, 1.25rem);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl, 2rem);
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative ring */
+.ctaBanner::before {
+  content: '';
+  position: absolute;
+  right: -80px;
+  top: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 40px solid rgba(229 83 53 / 0.08);
+  pointer-events: none;
+}
+
+.ctaBannerText {
+  flex: 1;
+  min-width: 220px;
+}
+
+.ctaBannerTitle {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.ctaBannerSub {
+  font-size: var(--font-size-md, 1rem);
+  color: rgba(255 255 255 / 0.65);
+  margin: 0;
+  max-width: 48ch;
+}
+
+.ctaBannerActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ctaBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1.75rem;
+  background: var(--color-accent, #e53e3e);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--border-radius-lg, 0.75rem);
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  white-space: nowrap;
+}
+
+.ctaBtnPrimary:hover {
+  background: #c53030;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(229 83 53 / 0.35);
+}
+
+.ctaBtnPrimary:active {
+  transform: translateY(0);
+}
+
+.ctaBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.75rem;
+  background: transparent;
+  color: rgba(255 255 255 / 0.85);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--border-radius-lg, 0.75rem);
+  border: 1px solid rgba(255 255 255 / 0.2);
+  text-decoration: none;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+  white-space: nowrap;
+}
+
+.ctaBtnSecondary:hover {
+  border-color: rgba(255 255 255 / 0.5);
+  color: #fff;
+  background: rgba(255 255 255 / 0.06);
+}
+
+@media (max-width: 640px) {
+  .ctaBanner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ctaBannerActions {
+    width: 100%;
+    justify-content: center;
+  }
+  .ctaBanner::before { display: none; }
+}
+@media (max-width: 600px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .statItem { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--spacing-md, 1rem); }
+  .statItem:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+  .statItem:nth-last-child(-n+2) { border-bottom: none; }
+  .statNumber { white-space: normal; }
+}

@@ -1,0 +1,162 @@
+.picker { display: flex; flex-direction: column; gap: var(--spacing-md); }
+
+.calendarHeader {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         var(--spacing-sm) 0;
+}
+.navBtn {
+  width:           2rem;
+  height:          2rem;
+  border-radius:   var(--border-radius-md);
+  border:          1px solid var(--color-border);
+  background:      #ffffff;
+  cursor:          pointer;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           var(--color-text-grey);
+  font-size:       var(--font-size-md);
+  transition:      background var(--transition-fast), border-color var(--transition-fast);
+}
+.navBtn:hover { background: var(--color-bg-light); border-color: var(--color-border-strong); }
+.monthYear    { font-family: var(--font-heading); font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); color: var(--color-text-dark); }
+
+.weekdays {
+  display:               grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align:            center;
+  gap:                   0.25rem;
+}
+.weekday { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0; }
+
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.25rem; }
+.day {
+  aspect-ratio:  1;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  font-size:     var(--font-size-sm);
+  font-weight:   var(--font-weight-medium);
+  color:         var(--color-text-dark);
+  border-radius: var(--border-radius-md);
+  cursor:        pointer;
+  border:        1px solid transparent;
+  transition:    background var(--transition-fast), color var(--transition-fast);
+}
+.day:hover           { background: var(--color-accent-subtle); color: var(--color-accent-dark); }
+.daySelected         { background: var(--color-accent); color: #ffffff; }
+.daySelected:hover   { background: var(--color-accent-dark); color: #ffffff; }
+.dayToday            { border-color: var(--color-accent); font-weight: var(--font-weight-bold); }
+.dayDisabled         { color: var(--color-text-muted); cursor: not-allowed; opacity: 0.4; }
+.dayEmpty            { cursor: default; pointer-events: none; }
+
+/* Time slots */
+.timeSlotsSection { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+.sectionLabel     { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-text-dark); }
+.timeSlots        { display: grid; grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr)); gap: var(--spacing-sm); }
+
+.timeSlot {
+  padding:       0.5rem 0.25rem;
+  border:        1.5px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background:    #ffffff;
+  font-size:     var(--font-size-xs);
+  font-weight:   var(--font-weight-medium);
+  color:         var(--color-text-dark);
+  text-align:    center;
+  cursor:        pointer;
+  transition:    background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  line-height:   1.4;
+}
+.timeSlot:hover          { background: var(--color-accent-subtle); border-color: var(--color-accent); color: var(--color-accent-dark); }
+.timeSlotSelected        { background: var(--color-accent); border-color: var(--color-accent); color: #ffffff; }
+.timeSlotSelected:hover  { background: var(--color-accent-dark); }
+.timeSlotDisabled        { opacity: 0.4; cursor: not-allowed; pointer-events: none; background: var(--color-bg-light); }
+
+/* Summary pill shown below selection */
+.selectionSummary {
+  display:       flex;
+  align-items:   center;
+  gap:           var(--spacing-sm);
+  padding:       var(--spacing-sm) var(--spacing-md);
+  background:    var(--color-accent-subtle);
+  border:        1px solid #fed7aa;
+  border-radius: var(--border-radius-md);
+  font-size:     var(--font-size-sm);
+  color:         var(--color-accent-dark);
+  font-weight:   var(--font-weight-medium);
+}
+
+.timeSlotDisabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  text-decoration: line-through;
+}
+
+.timeSlotDisabled:hover {
+  transform: none;
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  box-shadow: none;
+}
+
+/* ── Date input ── */
+.dateInput {
+  width:         100%;
+  padding:       0.55rem 0.75rem;
+  border:        1.5px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size:     var(--font-size-sm);
+  font-family:   var(--font-body);
+  color:         var(--color-text-dark);
+  background:    #ffffff;
+  transition:    border-color 180ms ease;
+  cursor:        pointer;
+}
+.dateInput:focus { outline: none; border-color: var(--color-accent); }
+
+/* ── Field wrapper ── */
+.field  { display: flex; flex-direction: column; gap: 0.4rem; }
+.label  { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── Title/subtitle (replaces Section double-render) ── */
+.title    { font-family: var(--font-heading); font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0 0 0.25rem; }
+.subtitle { font-size: var(--font-size-sm); color: var(--color-text-grey); margin: 0 0 var(--spacing-md); }
+.wrapper  { display: flex; flex-direction: column; gap: var(--spacing-md); }
+
+/* ── Summary pill (no emoji) ── */
+.summary {
+  display:       flex;
+  align-items:   center;
+  gap:           var(--spacing-sm);
+  padding:       var(--spacing-sm) var(--spacing-md);
+  background:    var(--color-accent-subtle);
+  border:        1px solid var(--color-accent);
+  border-radius: var(--border-radius-md);
+  font-size:     var(--font-size-sm);
+  color:         var(--color-accent-dark);
+  font-weight:   var(--font-weight-medium);
+}
+.summaryIcon { display: none; }
+
+/* ── Booked slot strikethrough style ── */
+.timeSlotBooked {
+  opacity:         0.5;
+  cursor:          not-allowed;
+  background:      #f3f4f6;
+  color:           #9ca3af;
+  border-color:    #e5e7eb;
+  text-decoration: line-through;
+  pointer-events:  none;
+}
+.timeSlotBooked:hover {
+  background:   #f3f4f6;
+  border-color: #e5e7eb;
+  color:        #9ca3af;
+}

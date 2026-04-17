@@ -1,0 +1,64 @@
+.selector    { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.header      { display: flex; align-items: center; justify-content: space-between; }
+.title       { font-family: var(--font-heading); font-size: var(--font-size-md); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0; }
+
+.grid        { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-md); }
+
+.vehicleCard {
+  padding:       var(--spacing-md);
+  border:        1.5px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  cursor:        pointer;
+  background:    #ffffff;
+  transition:    border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  display:       flex;
+  flex-direction: column;
+  gap:           var(--spacing-xs);
+  position:      relative;
+}
+.vehicleCard:hover    { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+.vehicleCardSelected  { border-color: var(--color-accent); background: var(--color-accent-subtle); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+
+.checkmark {
+  position:        absolute;
+  top:             var(--spacing-sm);
+  right:           var(--spacing-sm);
+  width:           1.25rem;
+  height:          1.25rem;
+  border-radius:   50%;
+  background:      var(--color-accent);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  color:           #ffffff;
+  font-size:       0.65rem;
+  opacity:         0;
+  transform:       scale(0.6);
+  transition:      opacity var(--transition-fast), transform var(--transition-fast);
+}
+.vehicleCardSelected .checkmark { opacity: 1; transform: scale(1); }
+
+.vehicleIcon  { font-size: 1.75rem; margin-bottom: 0.25rem; }
+.vehiclePlate { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-text-dark); background: #f1f5f9; padding: 0.2rem 0.5rem; border-radius: var(--border-radius-sm); letter-spacing: 0.08em; display: inline-block; }
+.vehicleName  { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-text-dark); margin: 0; }
+.vehicleInfo  { font-size: var(--font-size-xs); color: var(--color-text-muted); margin: 0; }
+
+.addCard {
+  padding:         var(--spacing-md);
+  border:          1.5px dashed var(--color-border);
+  border-radius:   var(--border-radius-lg);
+  cursor:          pointer;
+  background:      transparent;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  gap:             var(--spacing-sm);
+  color:           var(--color-text-muted);
+  font-size:       var(--font-size-sm);
+  font-weight:     var(--font-weight-medium);
+  transition:      border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  min-height:      7rem;
+}
+.addCard:hover   { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-subtle); }
+.addIcon         { font-size: 1.5rem; }

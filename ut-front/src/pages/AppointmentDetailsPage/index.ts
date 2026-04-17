@@ -1,0 +1,1 @@
+export { AppointmentDetailsPage } from './AppointmentDetailsPage';

@@ -1,0 +1,54 @@
+@import './variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family:             var(--font-body);
+  font-size:               var(--font-size-md);
+  color:                   var(--color-text-dark);
+  background:              var(--color-bg);
+  line-height:             1.6;
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height:              100vh;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color:       var(--color-text-dark);
+}
+
+h1 { font-size: clamp(1.875rem, 4vw, var(--font-size-4xl)); }
+h2 { font-size: clamp(1.5rem,   3vw, var(--font-size-3xl)); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl);  }
+h5 { font-size: var(--font-size-lg);  }
+h6 { font-size: var(--font-size-md);  }
+
+p  { line-height: 1.65; color: var(--color-text-grey); }
+
+a {
+  color:           var(--color-accent);
+  text-decoration: none;
+  transition:      color var(--transition-fast);
+}
+a:hover { color: var(--color-accent-dark); }
+a:focus-visible { outline: 3px solid var(--color-info); outline-offset: 2px; border-radius: 3px; }
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size:   inherit;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+ul, ol { list-style: none; }
+
+button { cursor: pointer; border: none; background: transparent; }
+
+#root { min-height: 100vh; display: flex; flex-direction: column; }

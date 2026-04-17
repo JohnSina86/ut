@@ -1,0 +1,26 @@
+.grid {
+  display:               grid;
+  grid-template-columns: repeat(var(--cols, 12), 1fr);
+  gap:                   var(--spacing-lg);
+}
+.gap-sm  { gap: var(--spacing-sm); }
+.gap-md  { gap: var(--spacing-md); }
+.gap-lg  { gap: var(--spacing-lg); }
+.gap-xl  { gap: var(--spacing-xl); }
+
+/* Auto-fit grids for card layouts */
+.autoFit-sm  { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.autoFit-md  { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.autoFit-lg  { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+
+/* Named column shortcuts */
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .cols-3, .cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .cols-2, .cols-3, .cols-4, .autoFit-md, .autoFit-lg { grid-template-columns: 1fr; }
+}

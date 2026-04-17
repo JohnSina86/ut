@@ -1,0 +1,82 @@
+.page   { display: flex; flex-direction: column; min-height: 100vh; background: var(--color-bg-light); }
+.main   { flex: 1; padding: var(--spacing-xl) 0; }
+
+.layout { display: grid; grid-template-columns: 240px 1fr; gap: var(--spacing-xl); align-items: flex-start; }
+
+/* Sidebar nav */
+.settingsNav { display: flex; flex-direction: column; gap: 0.25rem; }
+.navItem {
+  display:       flex;
+  align-items:   center;
+  gap:           var(--spacing-sm);
+  padding:       0.625rem var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-size:     var(--font-size-sm);
+  font-weight:   var(--font-weight-medium);
+  color:         var(--color-text-grey);
+  text-decoration: none;
+  cursor:        pointer;
+  background:    transparent;
+  border:        none;
+  width:         100%;
+  text-align:    left;
+  transition:    background var(--transition-fast), color var(--transition-fast);
+}
+.navItem:hover   { background: var(--color-bg-light); color: var(--color-text-dark); }
+.navItemActive   { background: var(--color-accent-subtle); color: var(--color-accent-dark); font-weight: var(--font-weight-semibold); }
+.navItemDanger   { color: var(--color-error); }
+.navItemDanger:hover { background: var(--color-error-light); color: var(--color-error); }
+.navDivider      { height: 1px; background: var(--color-border); margin: var(--spacing-sm) 0; }
+
+/* Settings panels */
+.panel { background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--border-radius-xl); padding: var(--spacing-xl); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: var(--spacing-xl); }
+.panelTitle   { font-family: var(--font-heading); font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text-dark); margin: 0 0 var(--spacing-xs); }
+.panelSubtitle { font-size: var(--font-size-sm); color: var(--color-text-grey); margin: 0; }
+.panelSection  { display: flex; flex-direction: column; gap: var(--spacing-md); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-border); }
+.panelSection:first-child { padding-top: 0; border-top: none; }
+.sectionLabel  { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-text-dark); margin-bottom: var(--spacing-sm); }
+
+/* Avatar edit */
+.avatarRow { display: flex; align-items: center; gap: var(--spacing-lg); }
+.avatarEdit { display: flex; flex-direction: column; gap: var(--spacing-sm); }
+
+/* Toggle rows */
+.toggleRow  { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); }
+.toggleInfo { flex: 1; }
+.toggleLabel { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-text-dark); }
+.toggleDesc  { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: 0.2rem; }
+.toggle {
+  flex-shrink:   0;
+  width:         2.75rem;
+  height:        1.5rem;
+  border-radius: var(--border-radius-full);
+  background:    var(--color-border);
+  position:      relative;
+  cursor:        pointer;
+  border:        none;
+  transition:    background var(--transition-fast);
+}
+.toggle::after {
+  content:       '';
+  position:      absolute;
+  top:           3px;
+  left:          3px;
+  width:         1.125rem;
+  height:        1.125rem;
+  border-radius: 50%;
+  background:    #ffffff;
+  box-shadow:    var(--shadow-sm);
+  transition:    transform var(--transition-fast);
+}
+.toggleOn { background: var(--color-accent); }
+.toggleOn::after { transform: translateX(1.25rem); }
+
+.formRow { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
+.actions { display: flex; gap: var(--spacing-sm); justify-content: flex-end; padding-top: var(--spacing-md); border-top: 1px solid var(--color-border); }
+
+@media (max-width: 768px) {
+  .layout   { grid-template-columns: 1fr; }
+  .settingsNav { flex-direction: row; flex-wrap: wrap; gap: 0; overflow-x: auto; padding-bottom: var(--spacing-sm); border-bottom: 1px solid var(--color-border); }
+  .navItem  { white-space: nowrap; }
+  .formRow  { grid-template-columns: 1fr; }
+}
