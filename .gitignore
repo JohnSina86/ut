@@ -27,3 +27,6 @@ Thumbs.db
 
 # TypeORM migrations (optional — remove if you want to track these)
 # src/migrations/
+
+# Backup files
+*.bak
