@@ -21,6 +21,9 @@ export class User {
   @Column({ type: 'varchar', length: 500, nullable: true })
   avatar?: string;
 
+  @Column({ type: 'enum', enum: ['admin', 'customer'], default: 'customer' })
+  role!: 'admin' | 'customer';
+
   @Column({ type: 'datetime', nullable: true })
   email_verified_at?: Date;
 

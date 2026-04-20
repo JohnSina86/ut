@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { NavBar } from './components/layout/NavBar/NavBar'
 import { Footer } from './components/layout/Footer/Footer'
 import { useAuth } from './context/AuthContext'
@@ -22,14 +22,18 @@ import { AppointmentDetailsPage } from './pages/AppointmentDetailsPage/Appointme
 import { AccountSettingsPage }    from './pages/AccountSettingsPage/AccountSettingsPage'
 import { NotFoundPage }           from './pages/NotFoundPage/NotFoundPage'
 import { PrivateRoute }           from './components/layout/PrivateRoute/PrivateRoute'
+import { AdminRoute }             from './components/layout/AdminRoute/AdminRoute'
+import { AdminLayout }             from './components/layout/AdminLayout/AdminLayout'
+import { AdminAppointmentsPage }   from './pages/AdminAppointmentsPage/AdminAppointmentsPage'
 import { OAuthCallbackPage }      from './pages/OAuthCallbackPage/OAuthCallbackPage'
 
 const BARE_ROUTES = ['/login', '/signup', '/reset-password', '/oauth/callback']
+const isAdminRoute = (pathname: string) => pathname.startsWith('/admin')
 
 function App() {
   const { pathname } = useLocation()
   const { user, logout } = useAuth()
-  const isBare = BARE_ROUTES.includes(pathname)
+  const isBare = BARE_ROUTES.includes(pathname) || isAdminRoute(pathname)
 
   const navUser = user
     ? {
@@ -69,6 +73,19 @@ function App() {
         <Route path="/appointments"     element={<PrivateRoute><AppointmentsPage /></PrivateRoute>} />
         <Route path="/appointments/:id" element={<PrivateRoute><AppointmentDetailsPage /></PrivateRoute>} />
         <Route path="/account-settings" element={<PrivateRoute><AccountSettingsPage /></PrivateRoute>} />
+
+        {/* Admin — guarded by AdminRoute, laid out with AdminLayout */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<Navigate to="appointments" replace />} />
+          <Route path="appointments" element={<AdminAppointmentsPage />} />
+        </Route>
 
         {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
