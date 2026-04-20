@@ -10,6 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { to: '/admin/appointments', label: 'Appointments' },
+  { to: '/admin/services', label: 'Services' },
   // Future admin sections can be added here (Customers, Services, Reports, etc.)
 ];
 

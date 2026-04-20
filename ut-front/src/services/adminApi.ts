@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Typed client for the /api/admin/* endpoints.
  *
  * All calls attach the bearer token from localStorage (written by
@@ -152,6 +152,24 @@ export const adminApi = {
       `/admin/appointments/${id}`,
       { method: 'DELETE' },
     ),
+
+  updateService: (id: number, data: {
+    name?: string;
+    description?: string;
+    category?: 'tyre' | 'maintenance' | 'repair';
+    duration_minutes?: number;
+    price?: number;
+    is_active?: boolean;
+  }) =>
+    request<Service>(`/services/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  removeService: (id: number) =>
+    request<{ id: number }>(`/services/${id}`, { method: 'DELETE' }),
+  createService: (data: { name: string; description?: string; category: 'tyre' | 'maintenance' | 'repair'; duration_minutes: number; price?: number; }) =>
+    request<Service>('/services', { method: 'POST', body: JSON.stringify(data) }),
 };
 
 export default adminApi;

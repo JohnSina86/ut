@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    HomePage — United Tyres Dundrum
    Tone: Professional automotive. Dark accents, warm neutrals.
    ============================================================ */
@@ -172,7 +172,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.8rem 1.75rem;
-  background: var(--color-accent, #e53e3e);
+  background: #e07b20;
   color: #fff;
   font-weight: 700;
   font-size: 0.95rem;
@@ -183,9 +183,10 @@
 }
 
 .ctaBtnPrimary:hover {
-  background: #c53030;
+  color: #fff;
+  background: #c45e00;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(229 83 53 / 0.35);
+  box-shadow: 0 8px 24px rgba(224 123 32 / 0.35);
 }
 
 .ctaBtnPrimary:active {

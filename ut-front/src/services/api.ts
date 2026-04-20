@@ -163,9 +163,7 @@ export const servicesAPI = {
     if (!res.ok) throw new Error(await res.text());
     return res.json();
   },
-};
-
-// ============ APPOINTMENTS ============
+};// ============ APPOINTMENTS ============
 export const appointmentsAPI = {
   getBookedSlots: async (date: string, durationMinutes: number = 60): Promise<string[]> => {
     const res = await fetch(`${API_BASE}/appointments`, { headers: headers() });

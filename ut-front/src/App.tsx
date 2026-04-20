@@ -1,4 +1,4 @@
-import React from 'react'
+ï»¿import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { NavBar } from './components/layout/NavBar/NavBar'
 import { Footer } from './components/layout/Footer/Footer'
@@ -25,6 +25,7 @@ import { PrivateRoute }           from './components/layout/PrivateRoute/Private
 import { AdminRoute }             from './components/layout/AdminRoute/AdminRoute'
 import { AdminLayout }             from './components/layout/AdminLayout/AdminLayout'
 import { AdminAppointmentsPage }   from './pages/AdminAppointmentsPage/AdminAppointmentsPage'
+import { AdminServicesPage } from './pages/AdminServicesPage/AdminServicesPage';
 import { OAuthCallbackPage }      from './pages/OAuthCallbackPage/OAuthCallbackPage'
 
 const BARE_ROUTES = ['/login', '/signup', '/reset-password', '/oauth/callback']
@@ -60,7 +61,7 @@ function App() {
         <Route path="/terms"          element={<TermsPage />} />
         <Route path="/privacy"        element={<PrivacyPage />} />
 
-        {/* Auth — bare layout */}
+        {/* Auth ï¿½ bare layout */}
         <Route path="/login"          element={<LoginPage />} />
         <Route path="/signup"         element={<SignUpPage />} />
         <Route path="/reset-password" element={<PasswordResetPage />} />
@@ -74,7 +75,7 @@ function App() {
         <Route path="/appointments/:id" element={<PrivateRoute><AppointmentDetailsPage /></PrivateRoute>} />
         <Route path="/account-settings" element={<PrivateRoute><AccountSettingsPage /></PrivateRoute>} />
 
-        {/* Admin — guarded by AdminRoute, laid out with AdminLayout */}
+        {/* Admin ï¿½ guarded by AdminRoute, laid out with AdminLayout */}
         <Route
           path="/admin"
           element={
@@ -85,6 +86,7 @@ function App() {
         >
           <Route index element={<Navigate to="appointments" replace />} />
           <Route path="appointments" element={<AdminAppointmentsPage />} />
+          <Route path="services" element={<AdminServicesPage />} />
         </Route>
 
         {/* 404 */}
