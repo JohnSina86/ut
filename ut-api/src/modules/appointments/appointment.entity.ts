@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, Index } from 'typeorm';
 import { User } from '../auth/auth.entity.js';
 import { Vehicle } from '../vehicles/vehicle.entity.js';
 import { ServiceEntity } from '../services/service.entity.js';
@@ -50,4 +50,7 @@ export class Appointment {
 
   @UpdateDateColumn({ type: 'datetime' })
   updated_at!: Date;
+
+  @DeleteDateColumn({ type: 'datetime', nullable: true })
+  deleted_at?: Date;
 }

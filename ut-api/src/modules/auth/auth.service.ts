@@ -10,7 +10,11 @@ export class AuthService {
     const hashed = await bcrypt.hash(data.password, 10);
     const user = this.repo.create({ ...data, password: hashed });
     const saved = await this.repo.save(user);
-    const token = jwt.sign({ id: saved.id, email: saved.email }, process.env.JWT_SECRET || 'secret', { expiresIn: '7d' });
+    const token = jwt.sign(
+      { id: saved.id, email: saved.email, role: saved.role },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '7d' },
+    );
     return { user: saved, token };
   }
 
@@ -19,7 +23,11 @@ export class AuthService {
     if (!user || !user.password) return null;
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return null;
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET || 'secret', { expiresIn: '7d' });
+    const token = jwt.sign(
+      { id: user.id, email: user.email, role: user.role },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '7d' },
+    );
     return { user, token };
   }
 
@@ -28,6 +36,8 @@ export class AuthService {
   }
 
   async updateProfile(userId: number, data: { fullName?: string; name?: string; phone?: string }) {
+    // Whitelist fields. `role` is deliberately NOT settable here — a regular
+    // customer must never be able to promote themselves to admin via this endpoint.
     const update: any = {};
     if (data.fullName) update.name = data.fullName;
     if (data.name)     update.name = data.name;
