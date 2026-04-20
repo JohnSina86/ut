@@ -5,9 +5,8 @@ import { StripeController } from './stripe.controller.js';
 const router = Router();
 const controller = new StripeController();
 
-router.use(requireAuth);
-
-router.post('/google-pay/create-intent', (req, res) => controller.createIntent(req, res));
-router.post('/google-pay/confirm',       (req, res) => controller.confirm(req, res));
+// Apply `requireAuth` per-route (see `paypal.routes.ts` for the explanation).
+router.post('/google-pay/create-intent', requireAuth, (req, res) => controller.createIntent(req, res));
+router.post('/google-pay/confirm',       requireAuth, (req, res) => controller.confirm(req, res));
 
 export default router;

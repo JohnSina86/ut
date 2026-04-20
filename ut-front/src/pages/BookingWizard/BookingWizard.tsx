@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Footer }          from '../../components/layout/Footer/Footer';
 import { Container }       from '../../components/layout/Container/Container';
 import { Section }         from '../../components/layout/Section/Section';
@@ -21,7 +21,6 @@ const STEPS = [
 ];
 
 export const BookingWizard = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [currentStep,       setCurrentStep]       = useState(0);
   const [selectedService,   setSelectedService]   = useState<string | undefined>();
