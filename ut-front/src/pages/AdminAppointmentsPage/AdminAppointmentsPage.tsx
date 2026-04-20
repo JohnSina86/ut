@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { adminApi, AdminAppointment, AppointmentStatus } from '../../services/adminApi';
+import { adminApi } from '../../services/adminApi';
+import type { AdminAppointment, AppointmentStatus } from '../../services/adminApi';
 import { AdminAppointmentModal } from '../../components/shared/AdminAppointmentModal/AdminAppointmentModal';
 import styles from './AdminAppointmentsPage.module.css';
 
@@ -269,3 +270,4 @@ export const AdminAppointmentsPage: React.FC = () => {
 };
 
 export default AdminAppointmentsPage;
+

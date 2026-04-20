@@ -4,7 +4,7 @@ import styles from './NavBar.module.css';
 
 interface NavItem { label: string; to: string; icon: string; }
 interface User    { name: string; email: string; initials: string; }
-interface NavBarProps { user?: User | null; onLogout?: () => void; }
+interface NavBarProps { user?: User | null; onLogout?: () => void; isAdmin?: boolean; }
 
 const NAV_ITEMS: NavItem[] = [
   { label: 'Home',     to: '/',         icon: '🏠' },
@@ -32,7 +32,7 @@ const Avatar = ({ initials }: { initials: string }) => (
   </span>
 );
 
-export const NavBar = ({ user = null, onLogout }: NavBarProps) => {
+export const NavBar = ({ user = null, onLogout, isAdmin = false }: NavBarProps) => {
   const [scrolled,     setScrolled]     = useState(false);
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -83,7 +83,7 @@ export const NavBar = ({ user = null, onLogout }: NavBarProps) => {
         <div className={styles.inner}>
 
           {/* Logo */}
-          <Link to="/" className={styles.logo} aria-label="United Tyres � Home">
+          <Link to="/" className={styles.logo} aria-label="United Tyres Home">
             <span className={styles.logoAccent}>United</span>
             <span className={styles.logoMain}>Tyres</span>
           </Link>
@@ -110,7 +110,7 @@ export const NavBar = ({ user = null, onLogout }: NavBarProps) => {
                 >
                   <Avatar initials={user.initials} />
                   <span>{user.name.split(' ')[0]}</span>
-                  <span className={`${styles.userChevron} ${userMenuOpen ? styles.userChevronOpen : ''}`}>›</span>
+                  <span className={`${styles.userChevron} ${userMenuOpen ? styles.userChevronOpen : ""}`} />
                 </button>
 
                 {userMenuOpen && (
@@ -125,7 +125,11 @@ export const NavBar = ({ user = null, onLogout }: NavBarProps) => {
                         <span className={styles.dropdownIcon}>{icon}</span>{label}
                       </Link>
                     ))}
-                    <div className={styles.dropdownDivider} />
+                                        {isAdmin && (
+                      <Link to="/admin/appointments" className={styles.dropdownItem} role="menuitem" onClick={() => setUserMenuOpen(false)}>
+                        <span className={styles.dropdownIcon}>🛡️</span>Admin Panel
+                      </Link>
+                    )}<div className={styles.dropdownDivider} />
                     <button className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
                       role="menuitem" onClick={handleLogout}>
                       <span className={styles.dropdownIcon}>🚪</span>Sign out
@@ -210,4 +214,8 @@ export const NavBar = ({ user = null, onLogout }: NavBarProps) => {
 };
 
 export default NavBar;
+
+
+
+
 

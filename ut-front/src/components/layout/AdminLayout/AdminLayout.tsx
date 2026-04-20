@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import styles from './AdminLayout.module.css';
@@ -42,6 +42,7 @@ export const AdminLayout: React.FC = () => {
             {item.label}
           </NavLink>
         ))}
+        <NavLink to="/" className={({ isActive }) => styles.navLink} style={{ marginTop: 'auto', opacity: 0.6, fontSize: '0.85rem' }}>← Back to site</NavLink>
       </aside>
 
       <div className={styles.main}>
@@ -68,3 +69,4 @@ export const AdminLayout: React.FC = () => {
 };
 
 export default AdminLayout;
+

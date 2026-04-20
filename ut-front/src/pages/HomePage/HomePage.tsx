@@ -12,7 +12,7 @@ import styles from './HomePage.module.css';
 const STATS = [
   { number: '10,000+', label: 'Cars Serviced' },
   { number: '15+',     label: 'Years in Dublin' },
-  { number: '4.9?',    label: 'Average Rating' },
+  { number: '4.9',    label: 'Average Rating' },
   { number: 'Same Day', label: 'Availability' },
 ];
 
@@ -61,7 +61,7 @@ export const HomePage = () => {
           <Container>
             <div className={styles.servicesGrid}>
               {loading ? (
-                <p>Loading services…</p>
+                <p>Loading servicesï¿½</p>
               ) : services.length === 0 ? (
                 <p>No services available at the moment.</p>
               ) : (
@@ -84,7 +84,7 @@ export const HomePage = () => {
         <Section title="How It Works" subtitle="Booking a service has never been easier." background="gray" align="center">
           <Container maxWidth="md">
             <div className={styles.stepsWrapper}>
-              <HowItWorksStep step={1} title="Login"              description="Sign in via Google — no new password needed." />
+              <HowItWorksStep step={1} title="Login"              description="Sign in via Google no new password needed." />
               <HowItWorksStep step={2} title="Choose a Service"   description="Browse our full list of car services and pick what you need." />
               <HowItWorksStep step={3} title="Select Your Vehicle" description="Tell us about your car or pick one you've saved before." />
               <HowItWorksStep step={4} title="Pick a Time Slot"   description="Choose a date and time that works best for you." />

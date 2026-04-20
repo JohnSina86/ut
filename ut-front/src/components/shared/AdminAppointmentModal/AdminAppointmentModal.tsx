@@ -1,13 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Modal } from '../../ui/Modal/Modal';
-import {
-  adminApi,
-  AdminAppointment,
-  AppointmentStatus,
-  Customer,
-  Service,
-  Vehicle,
-} from '../../../services/adminApi';
+import { adminApi } from '../../../services/adminApi';
+import type { AdminAppointment, AppointmentStatus, Customer, Service, Vehicle } from '../../../services/adminApi';
 import styles from './AdminAppointmentModal.module.css';
 
 interface Props {
@@ -443,3 +437,5 @@ export const AdminAppointmentModal: React.FC<Props> = ({
 };
 
 export default AdminAppointmentModal;
+
+

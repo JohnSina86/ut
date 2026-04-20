@@ -1,4 +1,4 @@
-﻿import axios from 'axios';
+import axios from 'axios';
 import { AppDataSource } from '../../data-source.js';
 import { VehicleSpec } from './vehicle-spec.entity.js';
 
@@ -48,8 +48,8 @@ export class VehicleSpecService {
         model,
         year,
         engine_size:  engine || (car.displacement ? `${car.displacement}L` : undefined),
-        fuel_type:    car.fuel_type,
-        // API-Ninjas doesn't provide tyre sizes — store other useful data
+
+        // API-Ninjas doesn't provide tyre sizes � store other useful data
         other_specs: {
           cylinders:      car.cylinders,
           transmission:   car.transmission,

@@ -1,4 +1,4 @@
-ï»¿import React from 'react'
+import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { NavBar } from './components/layout/NavBar/NavBar'
 import { Footer } from './components/layout/Footer/Footer'
@@ -50,7 +50,7 @@ function App() {
 
   return (
     <>
-      {!isBare && <NavBar user={navUser} onLogout={logout} />}
+      {!isBare && <NavBar user={navUser} onLogout={logout} isAdmin={user?.role === 'admin'} />}
 
       <Routes>
         {/* Public */}
@@ -60,7 +60,7 @@ function App() {
         <Route path="/terms"          element={<TermsPage />} />
         <Route path="/privacy"        element={<PrivacyPage />} />
 
-        {/* Auth â€” bare layout */}
+        {/* Auth — bare layout */}
         <Route path="/login"          element={<LoginPage />} />
         <Route path="/signup"         element={<SignUpPage />} />
         <Route path="/reset-password" element={<PasswordResetPage />} />
@@ -74,7 +74,7 @@ function App() {
         <Route path="/appointments/:id" element={<PrivateRoute><AppointmentDetailsPage /></PrivateRoute>} />
         <Route path="/account-settings" element={<PrivateRoute><AccountSettingsPage /></PrivateRoute>} />
 
-        {/* Admin â€” guarded by AdminRoute, laid out with AdminLayout */}
+        {/* Admin — guarded by AdminRoute, laid out with AdminLayout */}
         <Route
           path="/admin"
           element={
@@ -97,3 +97,4 @@ function App() {
 }
 
 export default App
+

@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
 interface User {
@@ -21,7 +21,7 @@ interface AuthContextType {
 }
 
 // Decode the payload portion of a JWT without verifying its signature. Used
-// only to surface the role on the client — all trust decisions remain on the
+// only to surface the role on the client � all trust decisions remain on the
 // server, which re-verifies the signature on every request.
 function decodeJwt(token: string): { role?: 'admin' | 'customer'; [k: string]: any } | null {
   try {
@@ -56,7 +56,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (token && userData) {
       try {
         const parsed = JSON.parse(userData) as User;
-        setUser(enrichUserWithRole(parsed, token));
+        const enriched = enrichUserWithRole(parsed, token);
+        localStorage.setItem('userData', JSON.stringify(enriched));
+        setUser(enriched);
       } catch (err) {
         console.error('Failed to restore user:', err);
       }
@@ -117,5 +119,6 @@ export const useAuth = () => {
   if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
+
 
 

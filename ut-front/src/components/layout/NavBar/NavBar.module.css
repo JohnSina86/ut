@@ -304,3 +304,20 @@
 @media (max-width: 480px) {
   .inner { padding: 0 var(--spacing-md); }
 }
+
+.userChevron {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 200ms ease;
+  margin-left: 0.25rem;
+  margin-bottom: 0.15rem;
+}
+.userChevronOpen {
+  transform: rotate(-135deg);
+  margin-bottom: -0.15rem;
+}
+
