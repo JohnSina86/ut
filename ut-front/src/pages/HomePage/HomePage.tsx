@@ -98,7 +98,7 @@ export const HomePage = () => {
         <Section title="What Our Customers Say" align="center">
           <Container>
             <div className={styles.testimonialsGrid}>
-              <TestimonialCard name="John D. "  role="Regular Customer"    comment="Great service, fast and reliable. I always trust them with my car!" rating={5} />
+              <TestimonialCard name="Patrick F. "  role="Regular Customer"    comment="Excellent, service with a smile. Highly recommended. James very helpful and obliging Nothing is too much trouble" rating={5} />
               <TestimonialCard name="Sarah M. " role="Verified Customer"   comment="The team at United Tyres are true professionals. Highly recommend."  rating={5} />
               <TestimonialCard name="Ali K. "   role="First-time Customer" comment="Booked online in minutes. Easy process and excellent work."            rating={5} />
             </div>
