@@ -81,10 +81,12 @@ export interface PayInPersonResponse {
 // ---------- API functions ----------
 
 export const paymentApi = {
-  createPaypalOrder: (appointmentId: number, amount: number) =>
+  // Amount is intentionally NOT sent — the server derives it from the
+  // appointment's service price. Anything we send would be ignored.
+  createPaypalOrder: (appointmentId: number) =>
     request<PaypalOrderResponse>('/payments/paypal/create-order', {
       method: 'POST',
-      body: JSON.stringify({ appointment_id: appointmentId, amount }),
+      body: JSON.stringify({ appointment_id: appointmentId }),
     }),
 
   capturePaypalOrder: (orderId: string, appointmentId: number) =>
@@ -93,10 +95,10 @@ export const paymentApi = {
       body: JSON.stringify({ orderId, appointmentId }),
     }),
 
-  createGooglePayIntent: (appointmentId: number, amount: number) =>
+  createGooglePayIntent: (appointmentId: number) =>
     request<GooglePayIntentResponse>('/payments/google-pay/create-intent', {
       method: 'POST',
-      body: JSON.stringify({ appointment_id: appointmentId, amount }),
+      body: JSON.stringify({ appointment_id: appointmentId }),
     }),
 
   confirmGooglePay: (paymentIntentId: string, appointmentId: number) =>
@@ -105,16 +107,16 @@ export const paymentApi = {
       body: JSON.stringify({ paymentIntentId, appointmentId }),
     }),
 
-  createDirectDebitRequest: (appointmentId: number, amount: number) =>
+  createDirectDebitRequest: (appointmentId: number) =>
     request<DirectDebitRequestResponse>('/payments/direct-debit/create-request', {
       method: 'POST',
-      body: JSON.stringify({ appointment_id: appointmentId, amount }),
+      body: JSON.stringify({ appointment_id: appointmentId }),
     }),
 
-  bookPayInPerson: (appointmentId: number, amount: number) =>
+  bookPayInPerson: (appointmentId: number) =>
     request<PayInPersonResponse>('/transactions/pay-in-person', {
       method: 'POST',
-      body: JSON.stringify({ appointment_id: appointmentId, amount }),
+      body: JSON.stringify({ appointment_id: appointmentId }),
     }),
 };
 
