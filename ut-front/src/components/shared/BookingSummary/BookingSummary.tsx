@@ -23,6 +23,9 @@ interface BookingSummaryProps {
   onConfirm: () => void;
   onEdit?: (step: 'service' | 'vehicle' | 'datetime') => void;
   isLoading?: boolean;
+  confirmLabel?: string;
+  loadingLabel?: string;
+  footerNote?: string;
 }
 
 const formatDate = (d: string) => {
@@ -44,6 +47,9 @@ const formatTime = (t: string) => {
 export const BookingSummary = ({
   service, vehicle, date, time, notes,
   onConfirm, onEdit, isLoading = false,
+  confirmLabel = 'Confirm Booking',
+  loadingLabel = 'Confirming…',
+  footerNote = "You'll receive a confirmation once the booking is accepted.",
 }: BookingSummaryProps) => {
   const duration = service?.duration_minutes ?? service?.duration;
   const canConfirm = !isLoading && !!service && !!vehicle && !!date && !!time;
@@ -127,7 +133,7 @@ export const BookingSummary = ({
           </div>
         )}
         <p className={styles.note}>
-          You'll receive a confirmation once the booking is accepted.
+          {footerNote}
         </p>
         <button
           onClick={onConfirm}
@@ -146,7 +152,7 @@ export const BookingSummary = ({
             transition:    'background 180ms',
           }}
         >
-          {isLoading ? 'Confirming…' : 'Confirm Booking'}
+          {isLoading ? loadingLabel : confirmLabel}
         </button>
       </div>
 

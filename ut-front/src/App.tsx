@@ -1,5 +1,8 @@
 ﻿import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+import type { Stripe } from '@stripe/stripe-js'
 import { NavBar } from './components/layout/NavBar/NavBar'
 import { Footer } from './components/layout/Footer/Footer'
 import { useAuth } from './context/AuthContext'
@@ -27,14 +30,39 @@ import { AdminLayout }             from './components/layout/AdminLayout/AdminLa
 import { AdminAppointmentsPage }   from './pages/AdminAppointmentsPage/AdminAppointmentsPage'
 import { AdminServicesPage } from './pages/AdminServicesPage/AdminServicesPage';
 import { OAuthCallbackPage }      from './pages/OAuthCallbackPage/OAuthCallbackPage'
+import { BookingConfirmedPage }   from './pages/BookingConfirmedPage/BookingConfirmedPage'
+import { DirectDebitCallbackPage } from './pages/DirectDebitCallbackPage/DirectDebitCallbackPage'
 
-const BARE_ROUTES = ['/login', '/signup', '/reset-password', '/oauth/callback']
+const STRIPE_PUBLISHABLE_KEY =
+  (import.meta as any).env?.VITE_STRIPE_PUBLISHABLE_KEY ?? ''
+
+// Load Stripe once at module scope. If no key is configured we skip the
+// <Elements> wrapper entirely so the booking pages still render.
+const stripePromise: Promise<Stripe | null> | null = STRIPE_PUBLISHABLE_KEY
+  ? loadStripe(STRIPE_PUBLISHABLE_KEY)
+  : null
+
+const BARE_ROUTE_PREFIXES = [
+  '/login',
+  '/signup',
+  '/reset-password',
+  '/oauth/callback',
+  '/booking/confirmed',
+  '/booking/direct-debit/callback',
+]
+
+const isBareRoute = (pathname: string) =>
+  BARE_ROUTE_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'))
+
 const isAdminRoute = (pathname: string) => pathname.startsWith('/admin')
+
+const withStripe = (node: React.ReactNode) =>
+  stripePromise ? <Elements stripe={stripePromise}>{node}</Elements> : <>{node}</>
 
 function App() {
   const { pathname } = useLocation()
   const { user, logout } = useAuth()
-  const isBare = BARE_ROUTES.includes(pathname) || isAdminRoute(pathname)
+  const isBare = isBareRoute(pathname) || isAdminRoute(pathname)
 
   const navUser = user
     ? {
@@ -61,7 +89,7 @@ function App() {
         <Route path="/terms"          element={<TermsPage />} />
         <Route path="/privacy"        element={<PrivacyPage />} />
 
-        {/* Auth � bare layout */}
+        {/* Auth — bare layout */}
         <Route path="/login"          element={<LoginPage />} />
         <Route path="/signup"         element={<SignUpPage />} />
         <Route path="/reset-password" element={<PasswordResetPage />} />
@@ -70,12 +98,35 @@ function App() {
         {/* Protected */}
         <Route path="/dashboard"        element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
         <Route path="/vehicles"         element={<PrivateRoute><VehiclesPage /></PrivateRoute>} />
-        <Route path="/booking"          element={<PrivateRoute><BookingWizard /></PrivateRoute>} />
+        <Route
+          path="/booking"
+          element={
+            <PrivateRoute>
+              {withStripe(<BookingWizard />)}
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/booking/confirmed"
+          element={
+            <PrivateRoute>
+              <BookingConfirmedPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/booking/direct-debit/callback"
+          element={
+            <PrivateRoute>
+              <DirectDebitCallbackPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/appointments"     element={<PrivateRoute><AppointmentsPage /></PrivateRoute>} />
         <Route path="/appointments/:id" element={<PrivateRoute><AppointmentDetailsPage /></PrivateRoute>} />
         <Route path="/account-settings" element={<PrivateRoute><AccountSettingsPage /></PrivateRoute>} />
 
-        {/* Admin � guarded by AdminRoute, laid out with AdminLayout */}
+        {/* Admin — guarded by AdminRoute, laid out with AdminLayout */}
         <Route
           path="/admin"
           element={
@@ -99,4 +150,3 @@ function App() {
 }
 
 export default App
-
