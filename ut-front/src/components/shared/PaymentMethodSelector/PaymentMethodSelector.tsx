@@ -94,7 +94,7 @@ export const PaymentMethodSelector: React.FC<Props> = ({
 
   const paypalOptions = useMemo(
     () => ({
-      'client-id': PAYPAL_CLIENT_ID || 'test',
+      clientId: PAYPAL_CLIENT_ID || 'test',
       currency: 'EUR',
       intent: 'capture',
     }),
@@ -106,19 +106,20 @@ export const PaymentMethodSelector: React.FC<Props> = ({
 
   const handleConfirm = async () => {
     if (!selected) return;
+    if (submitting) return; // double-click guard
     setError(null);
     setSubmitting(true);
 
     try {
       if (selected === 'pay_in_person') {
-        await paymentApi.bookPayInPerson(appointmentId, amount);
+        await paymentApi.bookPayInPerson(appointmentId);
         navigate(confirmedPath('pay_in_person'));
         return;
       }
 
       if (selected === 'direct_debit') {
         const { authorisationUrl } =
-          await paymentApi.createDirectDebitRequest(appointmentId, amount);
+          await paymentApi.createDirectDebitRequest(appointmentId);
         // Full-page redirect to GoCardless hosted flow.
         window.location.href = authorisationUrl;
         return;
@@ -130,7 +131,7 @@ export const PaymentMethodSelector: React.FC<Props> = ({
           return;
         }
         const { clientSecret, paymentIntentId } =
-          await paymentApi.createGooglePayIntent(appointmentId, amount);
+          await paymentApi.createGooglePayIntent(appointmentId);
         if (!clientSecret) {
           setError('Could not initialise Google Pay. Please try another method.');
           return;
@@ -268,7 +269,6 @@ export const PaymentMethodSelector: React.FC<Props> = ({
               createOrder={async () => {
                 const { orderId } = await paymentApi.createPaypalOrder(
                   appointmentId,
-                  amount,
                 );
                 return orderId;
               }}
