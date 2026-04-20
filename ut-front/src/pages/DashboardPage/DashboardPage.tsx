@@ -120,7 +120,7 @@ export const DashboardPage = () => {
                         {...n}
                         onViewDetails={(id: string) => window.location.href = `/appointments/${id}`}
                         onReschedule={(id: string)  => navigate(`/booking?reschedule=${id}`)}
-                        onCancel={async (id: string) => { try { await appointmentsAPI.cancel(id); setAppointments(prev => prev.filter(a => String(a.id) !== id)); } catch(e: any) { setError(e.message); } }}
+                        onCancel={async (id: string) => { try { await appointmentsAPI.cancel(Number(id)); setAppointments(prev => prev.filter(a => String(a.id) !== id)); } catch(e: any) { setError(e.message); } }}
                       />
                     );
                   })}

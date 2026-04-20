@@ -11,6 +11,9 @@ import serviceRouter from './modules/services/service.routes.js';
 import appointmentRouter from './modules/appointments/appointment.routes.js';
 import adminAppointmentRouter from './modules/appointments/admin-appointment.routes.js';
 import transactionRouter from './modules/transactions/transaction.routes.js';
+import paypalRouter from './modules/transactions/paypal.routes.js';
+import stripeRouter from './modules/transactions/stripe.routes.js';
+import gocardlessRouter from './modules/transactions/gocardless.routes.js';
 import businessSettingRouter from './modules/business-settings/business-setting.routes.js';
 import contactRouter from './modules/contact/contact.routes.js';
 
@@ -36,6 +39,9 @@ app.use('/api/services', serviceRouter);
 app.use('/api/appointments', appointmentRouter);
 app.use('/api/admin', adminAppointmentRouter);
 app.use('/api/transactions', transactionRouter);
+app.use('/api/payments', paypalRouter);
+app.use('/api/payments', stripeRouter);
+app.use('/api/payments', gocardlessRouter);
 app.use('/api/settings', businessSettingRouter);
 app.use('/api/contact', contactRouter);
 

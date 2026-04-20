@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Footer }          from '../../components/layout/Footer/Footer';
 import { Container }       from '../../components/layout/Container/Container';
 import { Section }         from '../../components/layout/Section/Section';
@@ -8,6 +8,7 @@ import { VehicleSelector } from '../../components/shared/VehicleSelector/Vehicle
 import { VehicleForm }     from '../../components/shared/VehicleForm/VehicleForm';
 import { DateTimePicker }  from '../../components/shared/DateTimePicker/DateTimePicker';
 import { BookingSummary }  from '../../components/shared/BookingSummary/BookingSummary';
+import { PaymentMethodSelector } from '../../components/shared/PaymentMethodSelector/PaymentMethodSelector';
 import { Spinner }         from '../../components/ui/Spinner/Spinner';
 import { servicesAPI, vehiclesAPI, appointmentsAPI } from '../../services/api';
 import styles from './BookingWizard.module.css';
@@ -20,7 +21,6 @@ const STEPS = [
 ];
 
 export const BookingWizard = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [currentStep,       setCurrentStep]       = useState(0);
   const [selectedService,   setSelectedService]   = useState<string | undefined>();
@@ -35,6 +35,8 @@ export const BookingWizard = () => {
   const [error,             setError]              = useState('');
   const [bookedSlots,     setBookedSlots]     = useState<string[]>([]);
   const [rescheduleId,    setRescheduleId]    = useState<number | null>(null);
+  const [paymentStage,    setPaymentStage]    = useState(false);
+  const [createdAppointmentId, setCreatedAppointmentId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,32 +107,34 @@ export const BookingWizard = () => {
     }
   };
 
-  const handleConfirmBooking = async () => {
+  const handleChoosePayment = async () => {
     if (!selectedService || !selectedVehicleId || !selectedDate || !selectedTime) {
-      setError('Please complete all steps before confirming.');
+      setError('Please complete all steps before continuing.');
       return;
     }
     try {
       setSubmitting(true);
       setError('');
+      const svc = services.find(s => String(s.id) === String(selectedService));
       if (rescheduleId) {
         const start = new Date(`${selectedDate}T${selectedTime}`);
-        const svc = services.find(s => String(s.id) === String(selectedService));
         const end = new Date(start);
         end.setMinutes(end.getMinutes() + (svc?.duration_minutes ?? 60));
         await appointmentsAPI.update(rescheduleId, {
           start_time: start.toISOString(),
           end_time:   end.toISOString(),
         });
+        setCreatedAppointmentId(rescheduleId);
       } else {
-        await appointmentsAPI.create({
+        const created = await appointmentsAPI.create({
           serviceId: Number(selectedService),
           vehicleId: Number(selectedVehicleId),
           date:      selectedDate,
           time:      selectedTime,
         });
+        setCreatedAppointmentId(Number(created?.id));
       }
-      navigate('/dashboard');
+      setPaymentStage(true);
     } catch (err: any) {
       let msg = err.message || 'Failed to create booking';
       try { const parsed = JSON.parse(msg); msg = parsed.error || parsed.message || msg; } catch {}
@@ -240,19 +244,36 @@ export const BookingWizard = () => {
                 )}
 
                 {/* Step 3 — Confirm */}
-                {currentStep === 3 && selectedService && selectedVehicleId && selectedDate && selectedTime && (
-                  <Section title="Confirm Booking" subtitle="Review your booking before confirming.">
+                {currentStep === 3 && selectedService && selectedVehicleId && selectedDate && selectedTime && !paymentStage && (
+                  <Section title="Confirm Booking" subtitle="Review your booking, then choose how you'd like to pay.">
                     <BookingSummary
                       service={services.find(s => String(s.id) === String(selectedService))}
                       vehicle={vehicles.find(v => String(v.id) === String(selectedVehicleId))}
                       date={selectedDate}
                       time={selectedTime}
-                      onConfirm={handleConfirmBooking}
+                      onConfirm={handleChoosePayment}
                       onEdit={(step) => {
                         if (step === 'service')  setCurrentStep(0);
                         if (step === 'vehicle')  setCurrentStep(1);
                         if (step === 'datetime') setCurrentStep(2);
                       }}
+                      isLoading={submitting}
+                      confirmLabel={'Choose How to Pay →'}
+                      loadingLabel={'Reserving your slot…'}
+                      footerNote={"We'll reserve your slot and then ask how you'd like to pay."}
+                    />
+                  </Section>
+                )}
+
+                {/* Step 3 — Payment */}
+                {currentStep === 3 && paymentStage && createdAppointmentId !== null && (
+                  <Section title="Choose Payment Method" subtitle="Pick how you'd like to pay for this appointment.">
+                    <PaymentMethodSelector
+                      appointmentId={createdAppointmentId}
+                      amount={Number(
+                        services.find(s => String(s.id) === String(selectedService))?.price ?? 0,
+                      )}
+                      onBack={() => setPaymentStage(false)}
                     />
                   </Section>
                 )}
@@ -271,9 +292,9 @@ export const BookingWizard = () => {
                   </button>
                 )}
 
-                {currentStep === STEPS.length - 1 && (
-                  <button className={styles.nextBtn} onClick={handleConfirmBooking} disabled={submitting}>
-                    {submitting ? 'Booking…' : 'Confirm Booking'}
+                {currentStep === STEPS.length - 1 && !paymentStage && (
+                  <button className={styles.nextBtn} onClick={handleChoosePayment} disabled={submitting}>
+                    {submitting ? 'Reserving…' : 'Choose How to Pay →'}
                   </button>
                 )}
               </div>

@@ -108,7 +108,7 @@ export const AppointmentsPage = () => {
                     onCancel={async (id) => {
                       if (!confirm('Cancel this appointment?')) return;
                       try {
-                        await appointmentsAPI.cancel(id);
+                        await appointmentsAPI.cancel(Number(id));
                         setAppointments((prev) =>
                           prev.map((a) => String(a.id) === id ? { ...a, status: 'cancelled' } : a)
                         );
